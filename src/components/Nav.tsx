@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useContentful } from './ContentfulProvider';
 
 export default function Nav() {
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
+  const { siteData } = useContentful();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -18,19 +20,30 @@ export default function Nav() {
     }
   }, [isDark]);
 
-  const links = [
-    { href: '/paintings', label: 'Paintings' },
-    { href: '/drawings', label: 'Drawings' },
+  // Create navigation links from work items + hardcoded About and Contact
+  const workLinks = siteData.work
+    .filter(work => work.fields.title) // Only include work with titles
+    .map(work => ({
+      href: `/${work.fields.title?.toLowerCase()}`,
+      label: work.fields.title,
+    }));
+
+  const hardcodedLinks = [
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
 
+  const links = [...workLinks, ...hardcodedLinks];
+
+  // Use site title from Contentful if available
+  const siteTitle = siteData.homePage[0]?.fields.title || 'Daniel Herr';
+
   return (
-    <nav className="z-10 bg-white/90 dark:bg-gray-900/50 backdrop-blur-sm border-b border-gray-300 dark:border-gray-800">
+    <nav className="z-10 bg-white/80 dark:bg-gray-900/50 sticky top-0 backdrop-blur-sm border-b border-gray-300 dark:border-gray-800">
       <div className="px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center flex-wrap">
         <div className="flex flex-wrap items-center space-x-8">
           <Link href="/" className="text-xl text-gray-900 dark:text-white">
-            Daniel Herr
+            {siteTitle}
           </Link>
           
           {links.map((link) => (
