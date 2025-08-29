@@ -45,20 +45,21 @@ export default function Nav() {
           <Link href="/" className="text-xl text-gray-900 dark:text-white">
             {siteTitle}
           </Link>
-          
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-lg transition-colors duration-100 ${
-                pathname === link.href
-                  ? 'text-gray-900 dark:text-white border-b border-gray-900 dark:border-white'
-                  : 'text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <div className="flex items-center flex-wrap space-x-4">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-lg transition-colors duration-100 ${
+                  pathname === link.href
+                    ? 'text-gray-900 dark:text-white border-b border-gray-900 dark:border-white'
+                    : 'text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
         
         <div className="flex items-center space-x-2">

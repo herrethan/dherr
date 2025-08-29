@@ -37,7 +37,7 @@ export default async function Home() {
       <div className="absolute inset-0 bg-black/0 dark:bg-black/70 transition-colors duration-300 pointer-events-none" />
       <div className="inline-flex flex-col gap-4 mt-12">
         {latestHappenings && latestHappenings.length > 0 && (
-          <div className="bg-white/80 dark:bg-white/5 p-4 pl-8 backdrop-blur-sm">
+          <div className="bg-white dark:text-black p-4 pl-8 z-10">
             {latestHappenings.map((happening) => (
               <div key={happening.sys.id}>
                 {happening.fields.content && (

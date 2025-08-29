@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import client from "@/lib/contentful";
 import { ContentfulAsset, Work } from '@/types/contentful';
+import Image from 'next/image';
 
 interface WorkPageProps {
   params: {
@@ -52,8 +53,10 @@ export default async function WorkPage({ params }: WorkPageProps) {
             work.fields.items.map((item: ContentfulAsset, index: number) => (
               <div key={item.sys.id || index} className="aspect-square bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                 {item.fields?.file?.url ? (
-                  <img 
-                    src={item.fields.file.url} 
+                  <Image
+                    width={800}
+                    height={800}
+                    src={item.fields.file.url.startsWith('//') ? `https:${item.fields.file.url}` : item.fields.file.url} 
                     alt={item.fields.title || `${title} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
