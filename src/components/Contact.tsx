@@ -1,23 +1,36 @@
 'use client';
 
+import { useState, useRef } from "react";
+
 export default function Contact() {
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const formDataObj = Object.fromEntries(formData.entries()) as Record<string, string>;
-    const asdf = await fetch("/__form.html", {
+    const res = await fetch("/__form.html", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formDataObj).toString(),
     });
-    console.log(asdf);
-    // Success and error handling ...
+    if (res.ok) {
+      setError('');
+      setSuccess(res.statusText || 'Message sent successfully');
+      formRef.current?.reset();
+    } else {
+      setSuccess('');
+      setError(res.statusText || 'Message failed to send');
+    }
   };
+
   return (
     <form 
       name="contact"
       className="max-w-md mx-auto"
       onSubmit={handleFormSubmit}
+      ref={formRef}
     >
       <input type="hidden" name="form-name" value="contact" />
       <p className="hidden">
@@ -53,6 +66,13 @@ export default function Contact() {
           className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-gray-900 dark:focus:border-white resize-none"
         />
       </div>
+
+      {success && (
+        <p className="p-4 mb-4 border bg-green-100 border-green-500 text-green-800">{success}</p>
+      )}
+      {error && (
+        <p className="p-4 mb-4 border bg-red-100 border-red-500 text-red-800">{error}</p>
+      )}
       
       <button
         type="submit"
