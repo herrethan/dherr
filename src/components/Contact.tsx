@@ -1,11 +1,23 @@
+'use client';
+
 export default function Contact() {
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formDataObj = Object.fromEntries(formData.entries()) as Record<string, string>;
+    const asdf = await fetch("/__form.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formDataObj).toString(),
+    });
+    console.log(asdf);
+    // Success and error handling ...
+  };
   return (
     <form 
-      name="contact" 
-      data-netlify="true"
-      method="POST"
-      data-netlify-honeypot="bot-field"
+      name="contact"
       className="max-w-md mx-auto"
+      onSubmit={handleFormSubmit}
     >
       <input type="hidden" name="form-name" value="contact" />
       <p className="hidden">
