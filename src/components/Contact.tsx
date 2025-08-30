@@ -3,9 +3,14 @@ export default function Contact() {
     <form 
       name="contact" 
       data-netlify="true"
+      method="POST"
+      data-netlify-honeypot="bot-field"
       className="max-w-md mx-auto"
     >
       <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden">
+        <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
+      </p>
       
       <div className="mb-4">
         <input
