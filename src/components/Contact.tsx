@@ -76,7 +76,8 @@ export default function Contact() {
       
       <button
         type="submit"
-        className="w-full px-6 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-100"
+        disabled={!!success}
+        className="disabled:opacity-50 disabled:hover:bg-gray-900 dark:disabled:hover:bg-white disabled:cursor-not-allowed w-full px-6 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors duration-100"
       >
         Send Message
       </button>
