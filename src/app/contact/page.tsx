@@ -1,15 +1,15 @@
-import ContactForm from '@/components/Contact';
+import Contact from '@/components/Contact';
 
 import client from '@/lib/contentful';
 import { renderRichText } from '@/lib/render-rich-text';
 import { cn } from '@/lib/utils';
-import { Contact } from '@/types/contentful';
+import { Contact as ContactType } from '@/types/contentful';
 
 async function getContactPage() {
   const contactPage = await client.getEntries({
     content_type: 'contact',
   });
-  return contactPage.items[0] as Contact;
+  return contactPage.items[0] as ContactType;
 }
 
 export default async function ContactPage() {
@@ -36,7 +36,7 @@ export default async function ContactPage() {
           {renderRichText(contactPage.fields.content.content)}
         </div>
       )}
-        <ContactForm />
+        <Contact />
       </div>
     </main>
   );
