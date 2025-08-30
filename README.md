@@ -24,7 +24,10 @@ A minimalistic artist portfolio built with Next.js, Contentful CMS, and Netlify 
      CONTENTFUL_ACCESS_TOKEN=your_access_token_here
      ```
 
-3. **Deploy to Netlify:**
+3. **Generate Contentful types**
+   `pnpm generate-types`
+   
+4. **Deploy to Netlify:**
    - Connect your GitHub repository to Netlify
    - Build command: `pnpm build`
    - Publish directory: `.next`

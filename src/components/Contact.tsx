@@ -2,7 +2,6 @@ export default function Contact() {
   return (
     <form 
       name="contact" 
-      method="POST" 
       data-netlify="true"
       className="max-w-md mx-auto"
     >
