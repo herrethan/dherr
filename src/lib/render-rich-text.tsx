@@ -59,7 +59,7 @@ export function renderRichText(content: RichTextContent[], insideListItem: boole
           <a 
             key={index}
             href={typeof node.data?.uri === 'string' ? node.data.uri : '#'} 
-            className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
+            className="inline-flex items-center gap-2"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -81,6 +81,7 @@ export function renderRichText(content: RichTextContent[], insideListItem: boole
             <a 
               key={index}
               href={fullUrl}
+              data-asset-hyperlink
               className="text-gray-500 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white flex items-center gap-2"
               target="_blank"
               rel="noopener noreferrer"

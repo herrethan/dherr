@@ -1,17 +1,42 @@
-import Contact from '@/components/Contact';
+import ContactForm from '@/components/Contact';
 
-export default function ContactPage() {
+import client from '@/lib/contentful';
+import { renderRichText } from '@/lib/render-rich-text';
+import { cn } from '@/lib/utils';
+import { Contact } from '@/types/contentful';
+
+async function getContactPage() {
+  const contactPage = await client.getEntries({
+    content_type: 'contact',
+  });
+  return contactPage.items[0] as Contact;
+}
+
+export default async function ContactPage() {
+  const contactPage = await getContactPage();
+  const backgroundImage = contactPage?.fields.background;
+
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center max-w-md mx-auto">
-        <h1 className="text-2xl sm:text-4xl font-light text-gray-900 dark:text-white mb-8">
-          Contact
-        </h1>
-        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-12">
-          Get in touch to discuss commissions, collaborations, or just to say hello.
-        </p>
-        
-        <Contact />
+    <main className={cn(
+      'min-h-screen flex items-center justify-center px-4',
+      backgroundImage ? 'bg-cover bg-center bg-no-repeat' : ''
+    )}
+      style={backgroundImage ? {
+        backgroundImage: `url(${backgroundImage.fields.file.url})`
+      } : undefined}
+    >
+      {/* Dark overlay for dark mode */}
+      <div className="absolute inset-0 bg-black/0 dark:bg-black/70 transition-colors duration-300 pointer-events-none" />
+      <h1 className="sr-only">
+        {contactPage?.fields?.title || 'Contact'}
+      </h1>
+      <div className="relative bg-white/90 dark:bg-black/80 -translate-y-32 max-w-md w-full mx-auto p-4">
+      {contactPage?.fields?.content && (
+        <div className="prose mb-4">
+          {renderRichText(contactPage.fields.content.content)}
+        </div>
+      )}
+        <ContactForm />
       </div>
     </main>
   );

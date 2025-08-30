@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import client from "@/lib/contentful";
-import { ContentfulAsset, Work } from '@/types/contentful';
+import { Work } from '@/types/contentful';
 import WorkGrid from '@/components/WorkGrid';
 
 interface WorkPageProps {

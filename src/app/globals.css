@@ -27,4 +27,7 @@ button, a {
   cursor: pointer;
 }
 
+a:not(nav a):not([data-asset-hyperlink]) {
+  @apply text-blue-600 dark:text-blue-400 hover:underline;
+}
 
