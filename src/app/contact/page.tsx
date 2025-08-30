@@ -18,7 +18,7 @@ export default async function ContactPage() {
 
   return (
     <main className={cn(
-      'min-h-screen flex items-center justify-center px-4',
+      'grow flex items-center justify-center px-4',
       backgroundImage ? 'bg-cover bg-center bg-no-repeat' : ''
     )}
       style={backgroundImage ? {
