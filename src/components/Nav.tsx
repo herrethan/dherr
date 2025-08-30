@@ -45,7 +45,7 @@ export default function Nav() {
           <Link href="/" className="text-xl text-gray-900 dark:text-white">
             {siteTitle}
           </Link>
-          <div className="flex items-center flex-wrap space-x-4">
+          <div className="flex items-center flex-wrap space-x-8">
             {links.map((link) => (
               <Link
                 key={link.href}

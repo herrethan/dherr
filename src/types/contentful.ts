@@ -1,5 +1,5 @@
 // Auto-generated Contentful types
-// Generated on: 2025-08-29T18:34:04.334Z
+// Generated on: 2025-08-30T15:45:16.999Z
 
 import { RichTextContent } from '@/lib/render-rich-text';
 
@@ -44,6 +44,15 @@ export interface RichText {
   nodeType: string;
 }
 
+
+export interface About {
+  sys: ContentfulSys;
+  fields: {
+    title?: string;
+    image?: ContentfulAsset;
+    content?: RichText;
+  };
+}
 
 export interface Work {
   sys: ContentfulSys;

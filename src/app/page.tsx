@@ -41,7 +41,7 @@ export default async function Home() {
             {latestHappenings.map((happening) => (
               <div key={happening.sys.id}>
                 {happening.fields.content && (
-                  <div className="prose">
+                  <div className="prose [&_p]:mb-0">
                     {renderRichText(happening.fields.content.content)}
                   </div>
                 )}
