@@ -112,15 +112,22 @@ export default function ImageCarousel({
       {/* Main image container */}
       <div className="relative flex items-center justify-center w-auto">
         {currentImage.fields?.file?.url ? (
-          <Image
-            src={currentImage.fields.file.url.startsWith('//') ? `https:${currentImage.fields.file.url}` : currentImage.fields.file.url}
-            alt={currentImage.fields.title || `${title} ${currentIndex + 1}`}
-            width={1200}
-            height={1200}
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)] object-contain"
-            priority
-          />
+          <>
+            <Image
+              src={currentImage.fields.file.url.startsWith('//') ? `https:${currentImage.fields.file.url}` : currentImage.fields.file.url}
+              alt={currentImage.fields.title || `${title} ${currentIndex + 1}`}
+              width={1200}
+              height={1200}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)] object-contain"
+              priority
+            />
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-center text-white">
+              <p className="text-xs">
+                {currentImage.fields.title || `${title} ${currentIndex + 1}`}
+              </p>
+            </div>
+          </>
         ) : (
           <div className="text-white text-center">``
             <p>Image not available</p>
@@ -128,12 +135,6 @@ export default function ImageCarousel({
         )}
       </div>
 
-      {/* Image counter and title */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-white/70 text-center p-4">
-        <p className="text-lg font-medium">
-          {currentImage.fields.title || `${title} ${currentIndex + 1}`}
-        </p>
-      </div>
     </div>
   );
 }
