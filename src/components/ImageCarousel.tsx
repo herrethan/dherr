@@ -125,6 +125,8 @@ export default function ImageCarousel({
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-center text-white">
               <p className="text-xs">
                 {currentImage.fields.title || `${title} ${currentIndex + 1}`}
+                {currentImage.fields.description && ' • '}
+                <span className="italic">{currentImage.fields.description}</span>
               </p>
             </div>
           </>

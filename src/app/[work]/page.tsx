@@ -4,9 +4,9 @@ import { Work } from '@/types/contentful';
 import WorkGrid from '@/components/WorkGrid';
 
 interface WorkPageProps {
-  params: {
+  params: Promise<{
     work: string;
-  };
+  }>;
 }
 
 async function getWorkData(workType: string) {
@@ -30,7 +30,7 @@ async function getWorkData(workType: string) {
 }
 
 export default async function WorkPage({ params }: WorkPageProps) {
-  const workType = params.work;
+  const { work: workType } = await params;
   const works = await getWorkData(workType);
   
   // If no work found for this type, show 404
@@ -44,7 +44,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center max-w-4xl mx-auto">
+      <div className="text-center max-w-7xl mx-auto">
         <WorkGrid images={images} title={title} />
       </div>
     </main>
