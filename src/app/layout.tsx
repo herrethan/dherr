@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Nanum_Gothic_Coding } from "next/font/google";
+import { Nanum_Gothic_Coding } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import SiteProvider from "@/components/SiteProvider";
 
-const inter = Inter({ subsets: ["latin"] });
 const nanumGothicCoding = Nanum_Gothic_Coding({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 // Re-fetch Contentful-backed pages periodically instead of only at deploy time (static default).
-export const revalidate = 300;
+export const revalidate = 60;
 
 export default function RootLayout({
   children,
