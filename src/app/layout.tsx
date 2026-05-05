@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description: "A minimalistic artist portfolio showcasing creative work by Daniel Herr",
 };
 
+// Re-fetch Contentful-backed pages periodically instead of only at deploy time (static default).
+export const revalidate = 300;
+
 export default function RootLayout({
   children,
 }: Readonly<{
